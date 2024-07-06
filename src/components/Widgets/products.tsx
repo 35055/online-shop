@@ -10,21 +10,22 @@ import {
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
 import { TProduct } from "../types/product";
+import { useNavigate } from "react-router-dom";
 
 type TProps = {
   product: TProduct;
-  open: () => void;
 };
 
 const Product = (props: TProps) => {
-  const { product, open } = props;
+  const { product } = props;
+  const navigate = useNavigate();
+
   return (
-    <Box key={product.id}>
+    <Box key={product.id} onClick={() => navigate(`product/${product.id}`)}>
       <Paper
         sx={{
           cursor: "pointer",
         }}
-        onClick={open}
         pos="relative"
         radius="md"
         p="md"

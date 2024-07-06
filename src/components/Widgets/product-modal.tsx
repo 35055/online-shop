@@ -1,48 +1,36 @@
-import { Carousel } from "@mantine/carousel";
-import { Modal, Text } from "@mantine/core";
+import { Grid, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+import useGetProduct from "../Hooks/use-get-product";
+import CarouselProductModal from "../Features/carousel-product-modal";
+import DescriptionProductModal from "../Features/description-product-modal";
+import ReviewsProductModal from "../Features/reviews-product-modal";
 
-type TProps = {
-  opened: boolean;
-  close: () => void;
-};
+const ProductModal = () => {
+  const [opened, { open, close }] = useDisclosure(true);
+  const { product, isLoading } = useGetProduct();
+  const navigate = useNavigate();
 
-const ProductModal = (props: TProps) => {
-  const { opened, close } = props;
+  if (isLoading || !product) return <h1>Loading...</h1>;
 
   return (
-    <Modal size="70%" opened={opened} onClose={close}>
-      <Carousel
-        maw={320}
-        mx="auto"
-        withIndicators
-        height={300}
-        styles={{
-          indicator: {
-            width: "30px",
-            height: "10px",
-            transition: "width 250ms ease",
-
-            "&[data-active]": {
-              width: "60px",
-            },
-          },
-        }}
-      >
-        <Carousel.Slide>
-          <img
-            style={{
-              objectFit: "cover",
-              width: "300px",
-              height: "300px",
-            }}
-            src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
-            alt=""
-          />
-        </Carousel.Slide>
-        <Carousel.Slide>2</Carousel.Slide>
-        <Carousel.Slide>3</Carousel.Slide>
-        {/* ...other slides */}
-      </Carousel>
+    <Modal
+      size="70%"
+      opened={opened}
+      onClose={() => {
+        close();
+        navigate(-1);
+      }}
+    >
+      <Grid>
+        <Grid.Col span={4}>
+          <CarouselProductModal product={product} />
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <DescriptionProductModal product={product} />
+        </Grid.Col>
+      </Grid>
+      <ReviewsProductModal product={product}/>
     </Modal>
   );
 };
