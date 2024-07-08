@@ -7,12 +7,16 @@ import {
   MediaQuery,
   Burger,
   useMantineTheme,
+  Flex,
+  ActionIcon,
 } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { IconShoppingCartFilled } from "@tabler/icons-react";
 
 export default function Layout() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <AppShell
@@ -39,7 +43,7 @@ export default function Layout() {
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
           <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
+            style={{ display: "flex", alignItems: "center", height: "100%", justifyContent:"flex-end" }}
           >
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
@@ -50,8 +54,11 @@ export default function Layout() {
                 mr="xl"
               />
             </MediaQuery>
-
-            <Text>Application header</Text>
+            <Flex>
+              <ActionIcon onClick={() => navigate("/cart")}>
+                <IconShoppingCartFilled />
+              </ActionIcon>
+            </Flex>
           </div>
         </Header>
       }

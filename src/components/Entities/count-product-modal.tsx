@@ -1,15 +1,16 @@
 import { Flex, ActionIcon, TextInput, Text } from "@mantine/core";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import { TProduct } from "../types/product";
-import { useState } from "react";
 
 type TProps = {
   product: TProduct;
+  count: number;
+  setCount: (count: number) => void;
 };
 
 const CountProductModal = (props: TProps) => {
-  const { product } = props;
-  const [count, setCount] = useState<number>(1);
+  const { product, count, setCount } = props;
+  
 
   return (
     <>

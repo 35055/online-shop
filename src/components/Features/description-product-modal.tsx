@@ -2,13 +2,20 @@ import { Flex, Title, Text, Button } from "@mantine/core";
 import { IconStarFilled, IconShoppingCartPlus } from "@tabler/icons-react";
 import { TProduct } from "../types/product";
 import CountProductModal from "../Entities/count-product-modal";
+import { useState } from "react";
+import addToCart from "../Entities/add-to-cart";
 
 type TProps = {
   product: TProduct;
 };
 
+
+
 const DescriptionProductModal = (props: TProps) => {
   const { product } = props;
+  const [count, setCount] = useState<number>(1);
+
+  
 
   return (
     <Flex direction="column" rowGap="xs">
@@ -22,11 +29,12 @@ const DescriptionProductModal = (props: TProps) => {
       <Title>{product.title}</Title>
       <Text>{product.warrantyInformation}</Text>
       <Text></Text>
-      <CountProductModal product={product} />
+      <CountProductModal count={count} setCount={setCount} product={product} />
       <Button
         leftIcon={<IconShoppingCartPlus stroke={2} />}
         w="160px"
         size="md"
+        onClick={() => addToCart(product, count)}
       >
         Add to cart
       </Button>
