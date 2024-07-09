@@ -13,7 +13,7 @@ const Cart = () => {
     }, []);
 
     useEffect(() => {
-        const total = productsLocal.reduce((sum, item) => sum + item.product.price, 0);
+        const total = productsLocal.reduce((sum, item) => sum + item.product.price * item.count, 0);
         setAllPrice(total);
     }, [productsLocal]);
 

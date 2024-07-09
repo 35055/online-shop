@@ -9,8 +9,7 @@ type TProps = {
 
 const CartProductsInfo = (props: TProps) => {
     const {productsLocal, setProductsLocal} = props;
-
-
+    
     return <Paper p="md">
     <Flex align="center" justify="space-between">
         <Checkbox label="Clear all" />
