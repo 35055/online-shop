@@ -63,7 +63,7 @@ const EditProductCart = (props: TProps) => {
         <ActionIcon onClick={() => removeProduct(item.product.id)}>
           <IconTrash stroke={2} />
         </ActionIcon>
-        <Text>{item.product.price * item.count} $</Text>
+        <Text>{(item.product.price * item.count).toFixed(2)} $</Text>
       </Flex>
     </Flex>
   );
